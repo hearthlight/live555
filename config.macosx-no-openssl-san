@@ -1,0 +1,17 @@
+COMPILE_OPTS =		$(INCLUDES) -I. -I/usr/local/include $(EXTRA_LDFLAGS) -DBSD=1 -O -DSOCKLEN_T=socklen_t -DHAVE_SOCKADDR_LEN=1 -DTIME_BASE=int -DNEED_XLOCALE_H=1 -DNO_OPENSSL=1
+C =			c
+C_COMPILER =		clang
+C_FLAGS =		$(COMPILE_OPTS)
+CPP =			cpp
+CPLUSPLUS_COMPILER =	clang++
+CPLUSPLUS_FLAGS =	$(COMPILE_OPTS) -Wall -std=c++20 -fsanitize=address,undefined -Wno-deprecated-declarations -Wno-unused-but-set-variable -Wno-int-to-pointer-cast -Wno-self-assign -Wno-format -Wno-array-bounds -Wno-ambiguous-reversed-operator -Wno-unused-private-field -Wno-deprecated-array-compare 
+OBJ =			o
+LINK =			clang++ -o
+LINK_OPTS =		-L. -fsanitize=address,undefined
+CONSOLE_LINK_OPTS =	$(LINK_OPTS)
+LIBRARY_LINK = clang -dynamiclib -o
+LIBRARY_LINK_OPTS =	-undefined dynamic_lookup
+LIB_SUFFIX =			dylib
+LIBS_FOR_CONSOLE_APPLICATION = 
+LIBS_FOR_GUI_APPLICATION =
+EXE =
