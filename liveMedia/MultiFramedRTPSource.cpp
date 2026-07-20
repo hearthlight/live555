@@ -120,7 +120,7 @@ void MultiFramedRTPSource::doGetNextFrame() {
     // Turn on background read handling of incoming packets:
     fAreDoingNetworkReads = True;
     TaskScheduler::BackgroundHandlerProc* handler
-      = (TaskScheduler::BackgroundHandlerProc*)&networkReadHandler;
+      = (TaskScheduler::BackgroundHandlerProc*)&networkReadHandlerWrapper;
     fRTPInterface.startNetworkReading(handler);
   }
 
@@ -592,7 +592,7 @@ void ReorderingPacketBuffer::releaseUsedPacket(BufferedPacket* packet) {
   ++fNextExpectedSeqNo; // because we're finished with this packet now
 
   fHeadPacket = fHeadPacket->nextPacket();
-  if (!fHeadPacket) { 
+  if (!fHeadPacket) {
     fTailPacket = NULL;
   }
   packet->nextPacket() = NULL;

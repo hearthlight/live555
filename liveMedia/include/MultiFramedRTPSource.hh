@@ -64,6 +64,9 @@ private:
   void reset();
   void doGetNextFrame1();
 
+  static void networkReadHandlerWrapper(void* source, int mask) {
+    networkReadHandler(static_cast<MultiFramedRTPSource*>(source), mask);
+  }
   static void networkReadHandler(MultiFramedRTPSource* source, int /*mask*/);
   void networkReadHandler1();
 

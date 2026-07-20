@@ -75,6 +75,9 @@ public:
   }
 
 private:
+  static void tcpReadHandlerWrapper(void* socketDescriptor, int mask) {
+    tcpReadHandler(static_cast<SocketDescriptor*>(socketDescriptor), mask);
+  }
   static void tcpReadHandler(SocketDescriptor*, int mask);
   Boolean tcpReadHandler1(int mask);
 
@@ -478,7 +481,7 @@ void SocketDescriptor::registerRTPInterface(unsigned char streamChannelId,
   if (isFirstRegistration) {
     // Arrange to handle reads on this TCP socket:
     TaskScheduler::BackgroundHandlerProc* handler
-      = (TaskScheduler::BackgroundHandlerProc*)&tcpReadHandler;
+      = (TaskScheduler::BackgroundHandlerProc*)&tcpReadHandlerWrapper;
     fEnv.taskScheduler().
       setBackgroundHandling(fOurSocketNum, SOCKET_READABLE|SOCKET_EXCEPTION, handler, this);
   }

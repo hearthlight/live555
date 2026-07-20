@@ -159,6 +159,10 @@ private:
 
   void sendBuiltPacket();
 
+  static void onExpireWrapper(void* instance) {
+    onExpire(static_cast<RTCPInstance*>(instance));
+  }
+
   static void onExpire(RTCPInstance* instance);
   void onExpire1();
 

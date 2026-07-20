@@ -1249,7 +1249,7 @@ void RTCPInstance::schedule(double nextTime) {
 #endif
   int64_t usToGo = (int64_t)(secondsToDelay * 1000000);
   nextTask() = envir().taskScheduler().scheduleDelayedTask(usToGo,
-				(TaskFunc*)RTCPInstance::onExpire, this);
+				(TaskFunc*)RTCPInstance::onExpireWrapper, this);
 }
 
 void RTCPInstance::reschedule(double nextTime) {
