@@ -1,0 +1,8 @@
+[package]
+name = "live555-src"
+version = "0.1.0"
+edition = "2021"
+license = "LGPL-3.0-or-later"
+description = "The live555 source tree, exposed to Cargo build scripts that embed it"
+repository = "https://github.com/hearthlight/live555"
+publish = false
